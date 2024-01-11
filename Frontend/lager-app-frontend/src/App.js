@@ -20,7 +20,7 @@ function App() {
             <Route path="/password-reset" component={PasswordResetPage} />
             <Route path="/home" component={HomePage} />
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/profile-details" component={ProfileDetailsPage} />
+            <Route path="/profile-details/:username" element={<ProfileDetailsPage />} />
             <Route path="/image-upload" component={ImageUploadPage} />
         </Routes>
       </div>

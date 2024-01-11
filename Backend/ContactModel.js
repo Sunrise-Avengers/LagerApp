@@ -21,6 +21,9 @@ const ContactSchema = new Schema({
         type: String,
         required: [true, "Password is required"]
     },
+    Token: {
+        type: String
+      }
 }, { collection: 'Users' });
  
 const ContactModel = model('ContactModel', ContactSchema);

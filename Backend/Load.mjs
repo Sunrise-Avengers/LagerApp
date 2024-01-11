@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import ContactModel from "./ContactModel.js";
- 
+
 // Verbinde dich mit der MongoDB auf dem Standardport (27017)
 mongoose.connect("mongodb://localhost:27017/lagerapp", { useUnifiedTopology: true, useNewUrlParser: true });
  
@@ -40,14 +40,19 @@ let counter = 1; // Starte bei 1
 const inputData = dataToAdd.map((name) => {
   const [firstName, lastName] = name.split(' ');
   const username = firstName; // Setze den Benutzernamen dem Vornamen gleich
-  return {
-    _id: counter++,
-    Username: username,
-    FirstName: firstName,
-    LastName: lastName,
-    Password: commonPassword
-  };
-});
+  
+  // Füge nur Lernende hinzu
+  if (dataToAdd.includes(username)) {
+    return {
+      _id: counter++,
+      Username: username,
+      FirstName: firstName,
+      LastName: lastName,
+      Password: commonPassword
+    };
+  }
+  return null; // Überspringe Nicht-Lernende
+}).filter(user => user !== null); // Filtere null-Werte heraus
  
 // Füge die Daten ein
 async function insertData() {
